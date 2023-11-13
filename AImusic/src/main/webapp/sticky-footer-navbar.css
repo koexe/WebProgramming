@@ -1,0 +1,44 @@
+
+main > .container {
+    padding: 60px 15px 0;
+
+}
+#showTable{
+    display: flex;
+}
+#youtube{
+    border-radius: 25px;
+}
+body{
+    background-color: #0a53be !important;
+}
+#playMusic{
+    display: block;
+}
+#recommand{
+    padding: 25px;
+    height: 100%;
+
+}
+#recommand > h1{
+    color: #ecedee;
+}
+#recommand > h3{
+    color: #ecedee;
+}
+#recommand > h2{
+    color: #ecedee;
+}
+#map{
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: solid 3px #1a1e21;
+}
+@media (max-width: 500px) {
+    #map{
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+    }
+}
