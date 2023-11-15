@@ -3,6 +3,12 @@ main > .container {
     padding: 60px 15px 0;
 
 }
+.recommend_button {
+        /* 기존 스타일 유지 */
+        /* 왼쪽 여백을 설정하여 이동시킴 */
+        margin-left: 20px; /* 원하는 여백 값으로 조절 */
+        text-align: right;
+}
 #showTable{
     display: flex;
 }
@@ -16,10 +22,16 @@ body{
     display: block;
 }
 #recommand{
-    padding: 25px;
+    padding: 45px;
     height: 100%;
 
 }
+#recommend_button{
+	padding: 15px;
+
+    
+}
+
 #recommand > h1{
     color: #ecedee;
 }
@@ -30,15 +42,19 @@ body{
     color: #ecedee;
 }
 #map{
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 0%;
     border: solid 3px #1a1e21;
+    margin-left: 200px;
 }
+
 @media (max-width: 500px) {
     #map{
-        width: 400px;
-        height: 400px;
+        width: 200px;
+        height: 200px;
         border-radius: 50%;
     }
 }
+
+
