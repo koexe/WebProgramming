@@ -7,6 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="apis.*" %>
+<%
+    double defaultLat = 36.33701029373081;
+    double defaultLon = 127.44509405440104;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +21,7 @@
 </head>
 <body class="d-flex flex-column h-100">
 <%
-    ApiExplorer weatherApi = new ApiExplorer();
-
-    double defaultLat = 36.33701029373081;
-    double defaultLon = 127.44509405440104;
-    if (request.getParameter("x") != null && request.getParameter("y") != null) {
-        defaultLat = Double.parseDouble(request.getParameter("x"));
-        defaultLon = Double.parseDouble(request.getParameter("y"));
-    }
-    String word = weatherApi.getWeather(defaultLat, defaultLon);
-    
+   
 %>
 <header>
     <!-- Fixed navbar -->
@@ -44,29 +39,36 @@
 </header>
 
 <script>
- 	 var ButtonKeyword = "";
- 	 function handleButtonClick(Button_Word, button) {
- 	     // 현재 버튼의 클래스 리스트를 가져옵니다
- 	        var buttonClasses = button.classList;
+     var ButtonKeyword = "";
+     function handleButtonClick(Button_Word, button) {
+         // 현재 버튼의 클래스 리스트를 가져옵니다
+            var buttonClasses = button.classList;
 
- 	        // 버튼이 'active' 클래스를 포함하고 있는지 여부를 확인합니다
- 	        var isActive = buttonClasses.contains('active');
+            // 버튼이 'active' 클래스를 포함하고 있는지 여부를 확인합니다
+            var isActive = buttonClasses.contains('active');
 
- 	        // 'active' 클래스를 토글합니다
- 	        buttonClasses.toggle('active');
+            // 'active' 클래스를 토글합니다
+            buttonClasses.toggle('active');
 
- 	        // 버튼이 활성화되어 있다면 문자열을 추가하고, 비활성화되어 있다면 제거합니다
- 	        if (!isActive) {
- 	            ButtonKeyword += Button_Word + " ";
- 	        } else {
- 	            // 버튼이 비활성화되면 해당 단어를 제거합니다
- 	            ButtonKeyword = ButtonKeyword.replace(Button_Word + " ", "");
- 	        }
+            // 버튼이 활성화되어 있다면 문자열을 추가하고, 비활성화되어 있다면 제거합니다
+            if (!isActive) {
+                ButtonKeyword += Button_Word + " ";
+            } else {
+                // 버튼이 비활성화되면 해당 단어를 제거합니다
+                ButtonKeyword = ButtonKeyword.replace(Button_Word + " ", "");
+            }
+            
+            var keywordDisplay = document.getElementById('selectedKeywords');
 
- 	        console.log("버튼 " + Button_Word + "이 클릭되었습니다.");
- 	        console.log(ButtonKeyword);
- 	        // 여기에 버튼이 클릭되었을 때 원하는 동작을 추가할 수 있습니다.
- 	    }
+            // 선택된 키워드를 표시합니다
+            if (keywordDisplay) {
+                keywordDisplay.textContent = ButtonKeyword.trim();
+            }
+
+            console.log("버튼 " + Button_Word + "이 클릭되었습니다.");
+            console.log(ButtonKeyword);
+            // 여기에 버튼이 클릭되었을 때 원하는 동작을 추가할 수 있습니다.
+        }
 </script>
 
 <!-- Begin page content -->
@@ -128,7 +130,7 @@
                 fetch("https://api.openai.com/v1/chat/completions", {
                     method: "POST",
                     headers: {
-                        Authorization: "Bearer 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",
+                        Authorization: "Bearer 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",
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
@@ -190,14 +192,14 @@
 
             <div id="recommand">
 
-                <h1>현재 위치한 곳의 하늘은 </h1>
-                <h1><%=word%></h1>
+                <h1> 나는 </h1>
+                <div id="selectedKeywords"></div>
                 <br>
-                <h3>에 듣기 좋은 노래는..</h3>
+                <h3>이런 음식을 먹고싶어..</h3>
                 <br>
                 <div class="result">
 
-        			</div>
+                 </div>
                 </div>
             </div>
         </div>
