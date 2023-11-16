@@ -56,8 +56,10 @@
 
             // 선택된 키워드를 표시합니다
             if (keywordDisplay) {
-                keywordDisplay.textContent = ButtonKeyword.trim();
-            }
+            keywordDisplay.textContent = ButtonKeyword.trim();
+            keywordDisplay.classList.add('highlight-keyword'); // 클래스 추가
+            // 필요한 다른 스타일을 CSS로 구현한 .highlight-keyword 클래스에 추가합니다.
+        }
 
             console.log("버튼 " + Button_Word + "이 클릭되었습니다.");
             console.log(ButtonKeyword);
@@ -124,7 +126,7 @@
                     fetch("https://api.openai.com/v1/chat/completions", {
                         method: "POST",
                         headers: {
-                            Authorization: "Bearer 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",
+                            Authorization: "Bearer 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",
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
@@ -197,7 +199,7 @@
             <div id="recommand">
 
                 <h1> 나는 </h1>
-                <div id="selectedKeywords"></div>
+                <div id="selectedKeywords" class="keyword-display"></div>
                 <br>
                 <h3>이런 음식을 먹고싶어..</h3>
                 <br>

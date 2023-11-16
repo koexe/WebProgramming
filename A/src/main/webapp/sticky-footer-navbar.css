@@ -6,8 +6,18 @@ main > .container {
 .recommend_button {
         /* 기존 스타일 유지 */
         /* 왼쪽 여백을 설정하여 이동시킴 */
-        margin-left: 20px; /* 원하는 여백 값으로 조절 */
-        text-align: right;
+        margin-left: 50px; /* 원하는 여백 값으로 조절 */
+        text-align: reft;
+}
+.keyword-display {
+    font-size: 18px;
+    color: blue;
+}
+
+.highlight-keyword {
+    font-size: 60px;
+    color: pink;
+    /* 다른 필요한 스타일 추가 가능 */
 }
 #showTable{
     display: flex;
@@ -39,14 +49,14 @@ body{
     color: #ecedee;
 }
 #recommand > h2{
-    color: #ecedee;
+    color: white;
 }
 #map{
-    width: 200px;
-    height: 200px;
-    border-radius: 0%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
     border: solid 3px #1a1e21;
-    margin-left: 200px;
+    margin-left: 0px;
 }
 
 @media (max-width: 500px) {
