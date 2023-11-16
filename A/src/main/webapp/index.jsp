@@ -43,7 +43,31 @@
     </nav>
 </header>
 
+<script>
+ 	 var ButtonKeyword = "";
+ 	 function handleButtonClick(Button_Word, button) {
+ 	     // 현재 버튼의 클래스 리스트를 가져옵니다
+ 	        var buttonClasses = button.classList;
 
+ 	        // 버튼이 'active' 클래스를 포함하고 있는지 여부를 확인합니다
+ 	        var isActive = buttonClasses.contains('active');
+
+ 	        // 'active' 클래스를 토글합니다
+ 	        buttonClasses.toggle('active');
+
+ 	        // 버튼이 활성화되어 있다면 문자열을 추가하고, 비활성화되어 있다면 제거합니다
+ 	        if (!isActive) {
+ 	            ButtonKeyword += Button_Word + " ";
+ 	        } else {
+ 	            // 버튼이 비활성화되면 해당 단어를 제거합니다
+ 	            ButtonKeyword = ButtonKeyword.replace(Button_Word + " ", "");
+ 	        }
+
+ 	        console.log("버튼 " + Button_Word + "이 클릭되었습니다.");
+ 	        console.log(ButtonKeyword);
+ 	        // 여기에 버튼이 클릭되었을 때 원하는 동작을 추가할 수 있습니다.
+ 	    }
+</script>
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
@@ -97,7 +121,8 @@
                 var hours = now.getHours()
                 let AIPick = "볼빨간 사춘기 - 여행";
                 let url = "";
-                let query = hours + "" + now.amPm() + ", <%=word%> 날씨에 맞는 한국 노래 1곡을 \"가수-제목\" 포맷으로 알려줘";
+                let query = ButtonKeyword + " 한 음식 1가지를 추천하는데 음식명만 알려줘";
+                
                 console.log(query);
 
                 fetch("https://api.openai.com/v1/chat/completions", {
@@ -108,7 +133,7 @@
                     },
                     body: JSON.stringify({
                         model: "gpt-3.5-turbo",
-                        messages: [{ role: "user", content: hours + "시, <%=word%> 날씨에 맞는 한국 노래 1곡을 \"가수-제목\" 포맷으로 알려줘" }],
+                        messages: [{ role: "user", content: ButtonKeyword + " 한 음식 1가지를 추천하는데 음식명만 알려줘" }],
                     }),
                 })
                     .then((res) => res.json())
@@ -177,39 +202,33 @@
             </div>
         </div>
     <div class ="recommend_button">
-            <h2>새로운 콘텐츠</h2>
-    <p>이곳에 원하는 내용을 추가할 수 있습니다.</p>
+            <h2>내가 원하는 음식은</h2>
+    <p></p>
 
-    <div class="button-row">
-        <!-- 첫 번째 열 -->
-        <button class="btn btn-primary" onclick="handleButtonClick(1)">버튼 1</button>
-        <button class="btn btn-secondary" onclick="handleButtonClick(2)">버튼 2</button>
-        <button class="btn btn-success" onclick="handleButtonClick(3)">버튼 3</button>
-        <button class="btn btn-danger" onclick="handleButtonClick(4)">버튼 4</button>
-    </div>
+<div class="button-row">
+    <!-- 첫 번째 열 -->
+    <button class="btn btn-primary" onclick="handleButtonClick('달달한', this)">달달한</button>
+    <button class="btn btn-secondary" onclick="handleButtonClick('매운', this)">매운</button>
+    <button class="btn btn-success" onclick="handleButtonClick('든든한', this)">든든한</button>
+    <button class="btn btn-danger" onclick="handleButtonClick('새콤한', this)">새콤한</button>
+</div>
 
-    <div class="button-row">
-        <!-- 두 번째 열 -->
-        <button class="btn btn-primary" onclick="handleButtonClick(1)">버튼 1</button>
-        <button class="btn btn-secondary" onclick="handleButtonClick(2)">버튼 2</button>
-        <button class="btn btn-success" onclick="handleButtonClick(3)">버튼 3</button>
-        <button class="btn btn-danger" onclick="handleButtonClick(4)">버튼 4</button>
-    </div>
+<div class="button-row">
+    <!-- 두 번째 열 -->
+    <button class="btn btn-primary" onclick="handleButtonClick('한식', this)">한식</button>
+    <button class="btn btn-secondary" onclick="handleButtonClick('중식', this)">중식</button>
+    <button class="btn btn-success" onclick="handleButtonClick('양식', this)">양식</button>
+    <button class="btn btn-danger" onclick="handleButtonClick('일식', this)">일식</button>
+</div>
 
-    <div class="button-row">
-        <!-- 세 번째 열 -->
-        <button class="btn btn-primary" onclick="handleButtonClick(1)">버튼 1</button>
-        <button class="btn btn-secondary" onclick="handleButtonClick(2)">버튼 2</button>
-        <button class="btn btn-success" onclick="handleButtonClick(3)">버튼 3</button>
-        <button class="btn btn-danger" onclick="handleButtonClick(4)">버튼 4</button>
-    </div>
-                <script>
-                	
-        			function handleButtonClick(buttonNumber) {
-            		console.log("버튼 " + buttonNumber + "이 클릭되었습니다.");
-            		// 여기에 버튼이 클릭되었을 때 원하는 동작을 추가할 수 있습니다.
-        			}
-   			 </script>
+<div class="button-row">
+    <!-- 세 번째 열 -->
+    <button class="btn btn-primary" onclick="handleButtonClick('뜨거운', this)">뜨거운</button>
+    <button class="btn btn-secondary" onclick="handleButtonClick('차가운', this)">차가운</button>
+    <button class="btn btn-success" onclick="handleButtonClick('국물있는', this)">국물있는</button>
+    <button class="btn btn-danger" onclick="handleButtonClick('국물없는', this)">국물없는</button>
+</div>
+
    </div>
 </main>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
