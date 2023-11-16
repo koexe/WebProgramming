@@ -127,17 +127,17 @@
                 
                 console.log(query);
                 function askQuestion() {
-                fetch("https://api.openai.com/v1/chat/completions", {
-                    method: "POST",
-                    headers: {
-                        Authorization: "Bearer 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",
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
-                        messages: [{ role: "user", content: ButtonKeyword + " 한 음식 1가지를 추천하는데 음식명만 알려줘" }],
-                    }),
-                })
+                    fetch("https://api.openai.com/v1/chat/completions", {
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer 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",
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            model: "gpt-3.5-turbo",
+                            messages: [{ role: "user", content: ButtonKeyword + " 한 음식 1가지를 추천하는데 음식명만 알려줘" }],
+                        }),
+                    })
                     .then((res) => res.json())
                     .then((data) => {
                         // Ensure that data.choices is defined and has at least one element
@@ -154,12 +154,19 @@
                                 data: { part: 'snippet', key: apikey, q: word, maxResults: 50, type: 'video', videoEmbeddable: 'true' },
                                 success: function (data) {
                                     console.log(data);
+                                    
+                                    // Remove existing YouTube content
+                                    $("#title").remove();
+                                    $("#youtube").remove();
+
+                                    // Add new YouTube content
                                     var title = $('<h1>', {
                                         id: "title",
                                         text: word
                                     });
                                     title.css('color', '#ecedee');
                                     $(".result").append(title);
+
                                     var iframe = $('<iframe>', {
                                         id: "youtube",
                                         width: "100%",
@@ -170,6 +177,7 @@
                                         allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     });
                                     $(".result").append(iframe);
+
                                     var cnt = 0;
                                     $.each(data.items, function (i, item) {
                                         thumbnail = item.snippet.thumbnails.medium.url; // 썸네일 이미지
@@ -184,7 +192,9 @@
                     })
                     .catch((error) => {
                         console.error("Error fetching data:", error);
-                    });}
+                    });
+                }
+
             </script>
             <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
             
