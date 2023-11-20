@@ -77,9 +77,6 @@ double defaultLon = 127.44509405440104;
 			<div id="showTable">
 				<div id="playMusic">
 				  <div>
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
-                    <button onclick="searchPlaces()">검색하기</button> 
-                            <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
             </div>
@@ -141,7 +138,7 @@ double defaultLon = 127.44509405440104;
                     fetch("https://api.openai.com/v1/chat/completions", {
                         method: "POST",
                         headers: {
-                            Authorization: "Bearer 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",
+                            Authorization: "Bearer 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",
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
@@ -212,11 +209,11 @@ double defaultLon = 127.44509405440104;
              // 키워드 검색을 요청하는 함수입니다
              function searchPlaces(keyWord_Input) {
 
-                 var keyword = document.getElementById('keyword').value;
+                 //var keyword = document.getElementById('keyword').value;
                  
                  console.log(keyWord_Input);
 
-                 if (!keyword.replace(/^\s+|\s+$/g, '')) {
+                 if (!keyWord_Input.replace(/^\s+|\s+$/g, '')) {
                      alert('키워드를 입력해주세요!');
                      return false;
                  }
