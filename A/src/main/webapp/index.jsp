@@ -17,25 +17,25 @@ double defaultLon = 127.44509405440104;
 <meta charset="UTF-8">
 <title>WELCOME</title>
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-	crossorigin="anonymous"></script>
+   src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+   crossorigin="anonymous"></script>
 <link href="sticky-footer-navbar.css?after" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">
-	<%
+   <%
 
-	%>
-	<header>
-		<!-- Fixed navbar -->
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-			<div class="collapse navbar-collapse justify-content-md-center">
-				<button onclick="askQuestion()">질문하기</button>
-			</div>
-		</nav>
-	</header>
+   %>
+   <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+         <div class="collapse navbar-collapse justify-content-md-center">
+            <button onclick="askQuestion()">질문하기</button>
+         </div>
+      </nav>
+   </header>
 
-	<script>
+   <script>
      var ButtonKeyword = "";
      function handleButtonClick(Button_Word, button) {
          // 현재 버튼의 클래스 리스트를 가져옵니다
@@ -70,21 +70,64 @@ double defaultLon = 127.44509405440104;
         }
 </script>
 
-	<!-- Begin page content -->
-	<main class="flex-shrink-0">
-		<div class="container">
-			<br>
-			<div id="showTable">
-				<div id="playMusic">
-				  <div>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-            </div>
-					<div id="map"></div>
-				</div>
-				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bd94f9a4656aff9055eeda75c7af11ad&libraries=services"></script>
-				<script>
+   <!-- Begin page content -->
+   <main class="flex-shrink-0">
+      <div class="container">
+         <br>
+         <div id="showTable">
+            <div id="playMusic"><div> 
+            <div id="map"></div>
+              
+              <div class="recommend_button">
+              
+         <h2>내가 원하는 음식은</h2>
+         <p></p>
+
+         <div class="button-row">
+            <!-- 첫 번째 열 -->
+            <button class="btn btn-primary"
+               onclick="handleButtonClick('달달한', this)">달달한</button>
+            <button class="btn btn-secondary"
+               onclick="handleButtonClick('매운', this)">매운</button>
+            <button class="btn btn-success"
+               onclick="handleButtonClick('든든한', this)">든든한</button>
+            <button class="btn btn-danger"
+               onclick="handleButtonClick('새콤한', this)">새콤한</button>
+         </div>
+
+         <div class="button-row">
+            <!-- 두 번째 열 -->
+            <button class="btn btn-primary"
+               onclick="handleButtonClick('한식', this)">한식</button>
+            <button class="btn btn-secondary"
+               onclick="handleButtonClick('중식', this)">중식</button>
+            <button class="btn btn-success"
+               onclick="handleButtonClick('양식', this)">양식</button>
+            <button class="btn btn-danger"
+               onclick="handleButtonClick('일식', this)">일식</button>
+         </div>
+
+         <div class="button-row">
+            <!-- 세 번째 열 -->
+            <button class="btn btn-primary"
+               onclick="handleButtonClick('뜨거운', this)">뜨거운</button>
+            <button class="btn btn-secondary"
+               onclick="handleButtonClick('차가운', this)">차가운</button>
+            <button class="btn btn-success"
+               onclick="handleButtonClick('국물있는', this)">국물있는</button>
+            <button class="btn btn-danger"
+               onclick="handleButtonClick('국물없는', this)">국물없는</button>
+         </div>
+
+      </div>
+      <ul id="placesList"></ul>
+              <div id="pagination"></div>
+      </div>
+               
+      </div>
+            <script type="text/javascript"
+               src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bd94f9a4656aff9055eeda75c7af11ad&libraries=services"></script>
+         	<script>
             
             	var markers = [];
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -141,7 +184,7 @@ double defaultLon = 127.44509405440104;
                     fetch("https://api.openai.com/v1/chat/completions", {
                         method: "POST",
                         headers: {
-                            Authorization: "Bearer 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",
+                            Authorization: "Bearer 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",
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
@@ -315,7 +358,7 @@ double defaultLon = 127.44509405440104;
 
                  // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
                  listEl.appendChild(fragment);
-                 menuEl.scrollTop = 0;
+                 //menuEl.scrollTop = 0;
 
                  // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                  map.setBounds(bounds);
@@ -422,67 +465,27 @@ double defaultLon = 127.44509405440104;
              }
 
             </script>
-				<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+            <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
 
 
 
-				<div id="recommand">
+            <div id="recommand">
 
-					<h1>나는</h1>
-					<div id="selectedKeywords" class="keyword-display"></div>
-					<br>
-					<h3>이런 음식을 먹고싶어..</h3>
-					<br>
+               <h1>나는</h1>
+               <div id="selectedKeywords" class="keyword-display"></div>
+               <br>
+               <h3>이런 음식을 먹고싶어..</h3>
+               <br>
 
-				</div>
-			</div>
-		</div>
-		<div class="recommend_button">
-			<h2>내가 원하는 음식은</h2>
-			<p></p>
-
-			<div class="button-row">
-				<!-- 첫 번째 열 -->
-				<button class="btn btn-primary"
-					onclick="handleButtonClick('달달한', this)">달달한</button>
-				<button class="btn btn-secondary"
-					onclick="handleButtonClick('매운', this)">매운</button>
-				<button class="btn btn-success"
-					onclick="handleButtonClick('든든한', this)">든든한</button>
-				<button class="btn btn-danger"
-					onclick="handleButtonClick('새콤한', this)">새콤한</button>
-			</div>
-
-			<div class="button-row">
-				<!-- 두 번째 열 -->
-				<button class="btn btn-primary"
-					onclick="handleButtonClick('한식', this)">한식</button>
-				<button class="btn btn-secondary"
-					onclick="handleButtonClick('중식', this)">중식</button>
-				<button class="btn btn-success"
-					onclick="handleButtonClick('양식', this)">양식</button>
-				<button class="btn btn-danger"
-					onclick="handleButtonClick('일식', this)">일식</button>
-			</div>
-
-			<div class="button-row">
-				<!-- 세 번째 열 -->
-				<button class="btn btn-primary"
-					onclick="handleButtonClick('뜨거운', this)">뜨거운</button>
-				<button class="btn btn-secondary"
-					onclick="handleButtonClick('차가운', this)">차가운</button>
-				<button class="btn btn-success"
-					onclick="handleButtonClick('국물있는', this)">국물있는</button>
-				<button class="btn btn-danger"
-					onclick="handleButtonClick('국물없는', this)">국물없는</button>
-			</div>
-
-		</div>
-	</main>
-	<link
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-		rel="stylesheet"
-		integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-		crossorigin="anonymous">
+            </div>
+         </div>
+      </div>
+      
+   </main>
+   <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous">
 </body>
-</html>
+</html>]</html>
