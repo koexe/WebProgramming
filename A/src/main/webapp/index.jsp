@@ -96,6 +96,9 @@ double defaultLon = 127.44509405440104;
                 var map = new kakao.maps.Map(mapContainer, mapOption);  // 지도를 생성합니다
                 var ps = new kakao.maps.services.Places(); 
                 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+                
+                var geocoder = new kakao.maps.services.Geocoder();
+				var InitaialAdress;
 
                 // 지도를 클릭한 위치에 표출할 마커입니다
                 var marker = new kakao.maps.Marker({
@@ -138,7 +141,7 @@ double defaultLon = 127.44509405440104;
                     fetch("https://api.openai.com/v1/chat/completions", {
                         method: "POST",
                         headers: {
-                            Authorization: "Bearer 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",
+                            Authorization: "Bearer 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",
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
@@ -204,7 +207,19 @@ double defaultLon = 127.44509405440104;
                     });
                 }
                 
-                //searchPlaces();
+             // 초기에 지도 중심 좌표에 대한 주소정보를 표시합니다
+                searchAddrFromCoords(map.getCenter(), function (result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        console.log('초기 주소:', result[0].address.address_name);
+                        InitaialAdress = result[0].address.address_name;
+                    }
+                });
+             
+                function searchAddrFromCoords(coords, callback) {
+                    // 좌표로 주소 정보를 요청합니다
+                    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+                }
+                
 
              // 키워드 검색을 요청하는 함수입니다
              function searchPlaces(keyWord_Input) {
@@ -212,6 +227,7 @@ double defaultLon = 127.44509405440104;
                  //var keyword = document.getElementById('keyword').value;
                  
                  console.log(keyWord_Input);
+                 var stringWithoutLastFive = InitaialAdress.slice(0, -5);
 
                  if (!keyWord_Input.replace(/^\s+|\s+$/g, '')) {
                      alert('키워드를 입력해주세요!');
@@ -219,7 +235,8 @@ double defaultLon = 127.44509405440104;
                  }
 
                  // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-                 ps.keywordSearch(keyWord_Input, placesSearchCB); 
+                 console.log(stringWithoutLastFive + keyWord_Input);
+                 ps.keywordSearch(stringWithoutLastFive + keyWord_Input, placesSearchCB); 
              }
 
              // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
